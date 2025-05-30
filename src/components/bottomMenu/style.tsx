@@ -9,7 +9,7 @@ const icon = {
 
 export const styles = StyleSheet.create({
     mainBottomMenu: {
-        bottom: 0,
+        bottom: 40,
         position: "absolute",
         display: "flex",
         flexDirection: "row",
@@ -20,6 +20,7 @@ export const styles = StyleSheet.create({
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
         backgroundColor: colors.mainColor,
+
     },
     bottomMenuContainer: {
         display: "flex",

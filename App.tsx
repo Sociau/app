@@ -7,7 +7,6 @@ import FirstPage from "./src/views/firstpage";
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { enableScreens } from 'react-native-screens';
 import { StatusBar, Platform, Text, View } from 'react-native';
-import * as SplashScreen from './src/utils/splash';
 import GlobalFont from 'react-native-global-font';
 import CreateAccountPage from './src/views/createaccountpage';
 import HomePage from './src/views/homepage';
@@ -17,6 +16,7 @@ import AboutUsPage from './src/views/aboutuspage';
 import ProfilePage from './src/views/profilepage';
 import NewPetPage from './src/views/newpetpage';
 import ImmersiveMode from 'react-native-immersive';
+import ForgetPasswordPage from './src/views/forgetpasswordpage';
 
 
 enableScreens();
@@ -62,6 +62,7 @@ export default function App() {
           <Stack.Screen name='AboutUsPage' component={AboutUsPage} />
           <Stack.Screen name='ProfilePage' component={ProfilePage} />
           <Stack.Screen name='NewPetPage' component={NewPetPage} />
+          <Stack.Screen name='ForgetPasswordPage' component={ForgetPasswordPage} />
 
         </Stack.Navigator>
       </NavigationContainer>

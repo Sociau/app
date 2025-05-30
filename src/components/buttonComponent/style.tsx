@@ -11,13 +11,11 @@ const styles = StyleSheet.create({
         backgroundColor: colors.textColor,
         borderRadius: 10,
         borderTopRightRadius: 0,
-        fontFamily: "Poppins-Regular",
     },
     buttonText: {
         fontSize: 24,
-        fontWeight: "bold",
         color: colors.secondTextColor,
-        fontFamily: "Poppins-Regular",
+        fontFamily: "Poppins-Bold",
     },
 });
 

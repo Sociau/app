@@ -4,15 +4,15 @@ import { colors } from "../../../rootStyles";
 export const styles = StyleSheet.create({
     containerFilter: {
         width: "100%",
-        height: "75%",
+        height: "70%",
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
         display: "flex",
         flexDirection: "column",
         position: "absolute",
         alignItems: "center",
-        backgroundColor: colors.baseColor,
         justifyContent: "space-between",
+        backgroundColor: colors.baseColor,
         bottom: 0,
         zIndex: 100,
         padding: 0,
@@ -30,7 +30,7 @@ export const styles = StyleSheet.create({
     },
     mainText: {
         fontSize: 24,
-        fontWeight: "bold",
+        fontFamily: "Poppins-Bold",
         paddingTop: 20
     },
     close: {
@@ -47,8 +47,7 @@ export const styles = StyleSheet.create({
         borderRadius: 50
     },
     closeText: {
-        fontWeight: "bold",
-        fontFamily: "Poppins-Regular",
+        fontFamily: "Poppins-Bold",
         fontSize: 24,
         color: colors.textColor,
     },
@@ -58,6 +57,14 @@ export const styles = StyleSheet.create({
         marginTop: 20,
         width: "85%",
         alignSelf: "center",
-        marginBottom: 20
-    }
+        marginBottom: 20,
+    },
+    FiltersContainer: {
+        width: "80%",
+    },
+    fieldPlace: {
+        width: "100%",
+        marginBottom: 25,
+    },
+    fieldInputContainer: { borderColor: "#b3b3b3", borderWidth: 1, width: "100%", borderRadius: 8 },
 })

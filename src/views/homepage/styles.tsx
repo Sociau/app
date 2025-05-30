@@ -9,4 +9,11 @@ export const styles = StyleSheet.create({
         height: "100%",
         backgroundColor: colors.baseColor
     },
+    scrollInside: {
+        width: '90%',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        paddingBottom: 100,
+    }
 })

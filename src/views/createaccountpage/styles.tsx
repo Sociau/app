@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         height: '100%',
         width: "100%",
-        fontFamily: "Poppins-Regular",
         backgroundColor: colors.baseColor
     },
 
@@ -40,8 +39,7 @@ const styles = StyleSheet.create({
     Title: {
         fontSize: 36,
         color: colors.helloText,
-        fontWeight: "bold",
-        fontFamily: "Poppins-Regular",
+        fontFamily: "Poppins-Bold",
         left: 109,
         top: 36,
     },
@@ -65,8 +63,7 @@ const styles = StyleSheet.create({
     account: {
         color: colors.textColor,
         fontSize: 15,
-        fontWeight: "bold",
-        fontFamily: "Poppins-Regular",
+        fontFamily: "Poppins-Bold",
     }
 });
 

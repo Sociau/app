@@ -15,12 +15,12 @@ export const styles = StyleSheet.create({
     hello: {
         color: colors.helloText,
         fontSize: 20,
-        fontWeight: "bold",
+        fontFamily: "Poppins-Bold",
     },
     alert: {
         color: "#8F8F8F",
         fontSize: 10,
-        fontWeight: "bold",
+        fontFamily: "Poppins-Bold",
     },
     profile: {
         display: "flex",

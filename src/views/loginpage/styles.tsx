@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         height: '100%',
         width: "100%",
-        fontFamily: "Poppins-Regular",
         backgroundColor: colors.baseColor
     },
 
@@ -48,8 +47,7 @@ const styles = StyleSheet.create({
         fontSize: 36,
         color: colors.textColor,
         marginTop: 20,
-        fontWeight: "bold",
-        fontFamily: "Poppins-Regular",
+        fontFamily: "Poppins-Bold",
     },
     inputContainer: {
         display: "flex",
@@ -65,10 +63,9 @@ const styles = StyleSheet.create({
     },
     forgetPassword: {
         fontSize: 20,
-        fontWeight: "bold",
         color: colors.textColor,
         marginTop: 10,
-        fontFamily: "Poppins-Regular",
+        fontFamily: "Poppins-Bold",
     },
 });
 

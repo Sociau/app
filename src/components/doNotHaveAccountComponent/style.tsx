@@ -4,9 +4,8 @@ import { colors } from "../../../rootStyles";
 const styles = StyleSheet.create({
     newAccount: {
         fontSize: 15,
-        fontWeight: "bold",
         color: colors.textColor,
-        fontFamily: "Poppins-Regular",
+        fontFamily: "Poppins-Bold",
     },
     newAccountContainer: {
         display: "flex",

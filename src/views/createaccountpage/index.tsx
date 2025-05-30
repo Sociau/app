@@ -16,6 +16,7 @@ const CreateAccountPage = () => {
 
     const getInput = (placeHolder: string, type: string, isSecure?: boolean) => {
         return <InputComponent
+            OnChangeTextFunction={() => { }}
             placeHolder={placeHolder}
             type={type}
             isSecure={isSecure}

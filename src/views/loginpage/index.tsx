@@ -41,8 +41,8 @@ const LoginPage = () => {
                     <Text style={styles.loginText}>Login</Text>
 
                     <View style={styles.inputContainer}>
-                        <InputComponent placeHolder="Email" placeHolderTextColor={colors.textColor} multiline={false} type="emailAddress" />
-                        <InputComponent placeHolder="Senha" placeHolderTextColor={colors.textColor} multiline={false} type="password" isSecure={mostrarSenha} />
+                        <InputComponent OnChangeTextFunction={() => { }} placeHolder="Email" placeHolderTextColor={colors.textColor} multiline={false} type="emailAddress" />
+                        <InputComponent OnChangeTextFunction={() => { }} placeHolder="Senha" placeHolderTextColor={colors.textColor} multiline={false} type="password" isSecure={mostrarSenha} />
                         <EyeIconComponent
                             handleFunction={setMostrarSenha}
                             status={mostrarSenha}

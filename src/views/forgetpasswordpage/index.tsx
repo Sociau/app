@@ -43,7 +43,7 @@ const ForgetPasswordPage = () => {
                     <Text style={styles.mainText}>Esqueci minha senha</Text>
 
                     <View style={styles.inputContainer}>
-                        <InputComponent placeHolder="Email" placeHolderTextColor={colors.textColor} multiline={false} type="emailAddress" />
+                        <InputComponent OnChangeTextFunction={() => { }} placeHolder="Email" placeHolderTextColor={colors.textColor} multiline={false} type="emailAddress" />
                     </View>
 
                     <ButtonComponent

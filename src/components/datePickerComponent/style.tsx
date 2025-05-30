@@ -27,12 +27,13 @@ export const styles = StyleSheet.create({
         backgroundColor: 'white',
         alignItems: "center",
         width: 85,
+
     },
     picker: {
         color: colors.helloText,
         height: 50,
-        width: 100,
+        width: "100%",
         fontSize: 16,
         fontFamily: 'Poppins-Regular',
-    }
+    },
 });
