@@ -85,6 +85,10 @@ const HomePage = () => {
         setOpenModal(!openModal)
     }
 
+    const goToPetPage = () => {
+        navigation.navigate("PetPage");
+    }
+
     return (
         <View>
             <View style={{ ...styles.mainHome, opacity: openModal ? 0.5 : 1, alignItems: 'center' }}>
@@ -93,7 +97,7 @@ const HomePage = () => {
 
                 <ScrollView contentContainerStyle={styles.scrollInside} showsVerticalScrollIndicator={false}>
                     {pets.map((pet, index) => (
-                        <PetComponent key={index} pet={pet} />
+                        <PetComponent key={index} pet={pet} handleFunction={goToPetPage} />
                     ))}
                 </ScrollView>
                 <BottomMenuComponent />

@@ -11,6 +11,7 @@ export type RootStackParamList = {
     CreateAccountPage: undefined,
     ProfilePage: undefined;
     NewPetPage: undefined;
+    PetPage: undefined;
 };
 
 export type HomeNavigationProp = StackNavigationProp<RootStackParamList, "HomePage">;
@@ -23,3 +24,4 @@ export type ForgetPasswordNavigationProp = StackNavigationProp<RootStackParamLis
 export type CreateAccountNavigationProp = StackNavigationProp<RootStackParamList, "CreateAccountPage">;
 export type ProfileNavigationProp = StackNavigationProp<RootStackParamList, "ProfilePage">;
 export type NewPetNavigationProp = StackNavigationProp<RootStackParamList, "NewPetPage">;
+export type PetNavigationProp = StackNavigationProp<RootStackParamList, "PetPage">;

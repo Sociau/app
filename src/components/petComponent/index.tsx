@@ -12,9 +12,9 @@ type PetObject = {
 const male = require("../../../assets/icons/male.png");
 const female = require("../../../assets/icons/female.png");
 
-const PetComponent = ({ pet }: { pet: PetObject }) => {
+const PetComponent = ({ pet, handleFunction }: { pet: PetObject, handleFunction: () => void }) => {
     return (
-        <TouchableOpacity style={styles.PetCompContainer}>
+        <TouchableOpacity style={styles.PetCompContainer} onPress={() => handleFunction()}>
             <Image source={{ uri: pet.image }} style={styles.PetCompImage} />
             <View style={styles.PetCompNameContainer}>
                 <Text style={styles.PetCompNameText}>{pet.name}</Text>
