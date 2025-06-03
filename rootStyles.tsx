@@ -7,7 +7,8 @@ export const colors = {
     helloText: "#202020",
     secondTextColor: "#333333",
     grayColor: "#F3F3F3",
-    baseColor: "#ffffff"
+    baseColor: "#ffffff",
+    transparentColor: "#939393"
 }
 
 export const fonts = {

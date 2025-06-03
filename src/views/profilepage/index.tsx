@@ -13,7 +13,7 @@ const ProfilePage = () => {
     const images = {
         notifications1: require('../../../assets/icons/notification1.png'),
         notifications2: require('../../../assets/icons/notification2.png'),
-        profile: require('../../../assets/icons/profile.png'),
+        profile: "https://classic.exame.com/wp-content/uploads/2024/12/RockyBalboa.jpg",
         nav: require('../../../assets/icons/nav.png'),
         edit: require("../../../assets/icons/edit.png"),
         black_arrow: require('../../../assets/icons/black_arrow.png'),
@@ -48,7 +48,7 @@ const ProfilePage = () => {
             </TouchableOpacity>
 
             <View style={styles.top}>
-                <Image source={images.profile} style={styles.profileImage} />
+                <Image source={{ uri: images.profile }} style={styles.profileImage} />
                 <TouchableOpacity>
                     <Image source={images.edit} style={styles.edit} />
                 </TouchableOpacity>

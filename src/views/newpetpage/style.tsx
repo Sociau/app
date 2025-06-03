@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     },
     backArrow: {
         position: "absolute",
-        left: 34,
+        left: 48,
         top: 64,
         zIndex: 100,
     },

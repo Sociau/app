@@ -24,61 +24,20 @@ const HomePage = () => {
             image: "https://i0.statig.com.br/bancodeimagens/78/pt/gs/78ptgsfeddfh638dkkzya5p3y.jpg"
         },
         {
-            name: "Zeca",
-            age: "2 anos",
+            name: "Henriquinho",
+            age: "5 anos",
             breed: "Vira-Lata",
             gender: "M",
-            image: "https://i0.statig.com.br/bancodeimagens/78/pt/gs/78ptgsfeddfh638dkkzya5p3y.jpg"
+            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZVGLhj-cSvyR84kbfc7-7mNPDCDHj_58p8Q&s"
         },
         {
-            name: "Zeca",
+            name: "Maria",
             age: "2 anos",
             breed: "Vira-Lata",
             gender: "F",
-            image: "https://i0.statig.com.br/bancodeimagens/78/pt/gs/78ptgsfeddfh638dkkzya5p3y.jpg"
+            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSk8d549JRA6Wa2gjyfbgNZ67456g2Di8EKiQ&s"
         },
-        {
-            name: "Zeca",
-            age: "2 anos",
-            breed: "Vira-Lata",
-            gender: "M",
-            image: "https://i0.statig.com.br/bancodeimagens/78/pt/gs/78ptgsfeddfh638dkkzya5p3y.jpg"
-        },
-        {
-            name: "Zeca",
-            age: "2 anos",
-            breed: "Vira-Lata",
-            gender: "M",
-            image: "https://i0.statig.com.br/bancodeimagens/78/pt/gs/78ptgsfeddfh638dkkzya5p3y.jpg"
-        },
-        {
-            name: "Zeca",
-            age: "2 anos",
-            breed: "Vira-Lata",
-            gender: "F",
-            image: "https://i0.statig.com.br/bancodeimagens/78/pt/gs/78ptgsfeddfh638dkkzya5p3y.jpg"
-        },
-        {
-            name: "Zeca",
-            age: "2 anos",
-            breed: "Vira-Lata",
-            gender: "M",
-            image: "https://i0.statig.com.br/bancodeimagens/78/pt/gs/78ptgsfeddfh638dkkzya5p3y.jpg"
-        },
-        {
-            name: "Zeca",
-            age: "2 anos",
-            breed: "Vira-Lata",
-            gender: "M",
-            image: "https://i0.statig.com.br/bancodeimagens/78/pt/gs/78ptgsfeddfh638dkkzya5p3y.jpg"
-        },
-        {
-            name: "Zeca",
-            age: "2 anos",
-            breed: "Vira-Lata",
-            gender: "F",
-            image: "https://i0.statig.com.br/bancodeimagens/78/pt/gs/78ptgsfeddfh638dkkzya5p3y.jpg"
-        },
+
     ]
 
     const handleFilterModal = () => {

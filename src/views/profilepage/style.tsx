@@ -72,11 +72,11 @@ const styles = StyleSheet.create({
     profileImage: {
         width: 180,
         height: 180,
-        borderRadius: 50,
+        borderRadius: 100,
     },
     edit: {
         position: "absolute",
-        top: "70%",
+        top: "67%",
         left: "60%",
         width: 28,
         height: 28,

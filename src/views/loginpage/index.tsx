@@ -8,15 +8,37 @@ import ButtonComponent from "../../components/buttonComponent";
 import DonotHaveAccountComponent from "../../components/doNotHaveAccountComponent";
 import InputComponent from "../../components/inputComponent";
 import EyeIconComponent from "../../components/eyeIconComponent";
+import { apiLogin } from "../../services/apiRequests";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const LoginPage = () => {
 
     const navigation = useNavigation<LoginNavigationProp>();
     const [mostrarSenha, setMostrarSenha] = useState(true);
 
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+
+
+    const handleLoginApi = async () => {
+        const userLogin = await apiLogin({
+            username: username.trim(),
+            password: password.trim()
+        })
+
+        if (userLogin && userLogin.data.token && userLogin.status == 200) {
+            const token = userLogin.data.token
+            await AsyncStorage.setItem("token", token)
+            await AsyncStorage.setItem("username", userLogin.data.user.username)
+            await AsyncStorage.setItem("user_id", userLogin.data.user._id)
+            navigation.navigate("HomePage")
+        } else {
+            navigation.navigate("FirstPage")
+        }
+    }
 
     const handleLogin = () => {
-        navigation.navigate("HomePage");
+        navigation.navigate("HomePage")
     }
 
     const handleForgetPassword = () => {
@@ -41,8 +63,8 @@ const LoginPage = () => {
                     <Text style={styles.loginText}>Login</Text>
 
                     <View style={styles.inputContainer}>
-                        <InputComponent OnChangeTextFunction={() => { }} placeHolder="Email" placeHolderTextColor={colors.textColor} multiline={false} type="emailAddress" />
-                        <InputComponent OnChangeTextFunction={() => { }} placeHolder="Senha" placeHolderTextColor={colors.textColor} multiline={false} type="password" isSecure={mostrarSenha} />
+                        <InputComponent OnChangeTextFunction={() => setUsername(username)} placeHolder="Email" placeHolderTextColor={colors.textColor} multiline={false} type="emailAddress" />
+                        <InputComponent OnChangeTextFunction={() => setPassword(password)} placeHolder="Senha" placeHolderTextColor={colors.textColor} multiline={false} type="password" isSecure={mostrarSenha} />
                         <EyeIconComponent
                             handleFunction={setMostrarSenha}
                             status={mostrarSenha}
