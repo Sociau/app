@@ -31,5 +31,11 @@ export const styles = StyleSheet.create({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+
     },
+    add: {
+        fontFamily: "Montserrat-Bold",
+        fontSize: 28,
+        color: colors.textColor
+    }
 })

@@ -3,7 +3,6 @@ import { ScrollView, View } from "react-native";
 import { styles } from "./styles";
 import BottomMenuComponent from "../../components/bottomMenu";
 import TopComponent from "../../components/topComponent";
-import ContentComponent from "../../components/contentComponent";
 import SearchComponent from "../../components/searchComponent";
 import FilterModal from "../../modals/filter";
 import { useNavigation } from "@react-navigation/native";

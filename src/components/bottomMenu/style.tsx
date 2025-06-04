@@ -3,20 +3,20 @@ import { colors } from "../../../rootStyles";
 
 
 const icon = {
-    width: 36,
-    height: 36
+    width: 31,
+    height: 31
 }
 
 export const styles = StyleSheet.create({
     mainBottomMenu: {
-        bottom: 40,
+        bottom: 47,
         position: "absolute",
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
         width: "100%",
-        height: "10%",
+        height: 60,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
         backgroundColor: colors.mainColor,
@@ -46,7 +46,7 @@ export const styles = StyleSheet.create({
         alignItems: "center",
         height: 73,
         borderRadius: 100,
-        marginBottom: 75,
+        marginBottom: 45,
         boxShadow: "0px 3px 8px 1px rgba(0, 0, 0, 0.25)"
     },
     paw: {

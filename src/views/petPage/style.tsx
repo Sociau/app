@@ -7,7 +7,7 @@ export const style = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         width: "100%",
-        fontFamily: "Poppins-Regular",
+        fontFamily: "Montserrat-Regular",
         backgroundColor: colors.baseColor
     },
     backArrow: {
@@ -39,12 +39,13 @@ export const style = StyleSheet.create({
         marginBottom: 10,
     },
     petName: {
-        fontFamily: "Poppins-Bold",
+        fontFamily: "Montserrat-Bold",
         fontSize: 20,
 
     },
     petSubtitle: {
-        fontFamily: "Poppins-Bold",
+        fontFamily: "Montserrat-Bold",
+        fontWeight: "bold",
         fontSize: 10,
         color: colors.transparentColor
     },
@@ -68,7 +69,7 @@ export const style = StyleSheet.create({
     },
 
     ownerTitle: {
-        fontFamily: "Poppins-Bold",
+        fontFamily: "Montserrat-Bold",
         fontSize: 20,
         marginTop: 20,
     },
@@ -97,13 +98,13 @@ export const style = StyleSheet.create({
         borderRadius: 50,
     },
     ownerName: {
-        fontFamily: "Poppins-Bold",
+        fontFamily: "Montserrat-Bold",
         fontSize: 10,
         marginLeft: 10,
         color: colors.transparentColor
     },
     ownerText: {
-        fontFamily: "Poppins-Bold",
+        fontFamily: "Montserrat-Bold",
         fontSize: 10,
         color: colors.mainColor
     }

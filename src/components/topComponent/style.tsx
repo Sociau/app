@@ -15,12 +15,12 @@ export const styles = StyleSheet.create({
     hello: {
         color: colors.helloText,
         fontSize: 20,
-        fontFamily: "Poppins-Bold",
+        fontFamily: "Montserrat-Medium",
     },
     alert: {
         color: "#8F8F8F",
         fontSize: 10,
-        fontFamily: "Poppins-Bold",
+        fontFamily: "Montserrat-Medium",
     },
     profile: {
         display: "flex",
@@ -29,8 +29,8 @@ export const styles = StyleSheet.create({
         alignItems: "center",
     },
     notification: {
-        width: 29,
-        height: 29,
+        width: 20,
+        height: 20,
     },
     profileImage: {
         width: 66,
@@ -44,8 +44,8 @@ export const styles = StyleSheet.create({
     },
     notificationContainer: {
         backgroundColor: colors.grayColor,
-        width: 46,
-        height: 46,
+        width: 31,
+        height: 31,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

@@ -69,9 +69,11 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     fieldCheckBoxText: {
+        width: "70%",
         color: colors.helloText,
         fontSize: 10,
         fontFamily: "Poppins-Bold",
+        textAlign: "center"
     },
     fieldCheckBoxContainer: {
         width: 16,

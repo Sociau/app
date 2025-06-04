@@ -34,7 +34,7 @@ export const styles = StyleSheet.create({
     },
     PetCompBreed: {
         fontSize: 8,
-        fontFamily: "Poppins-Bold",
+        fontFamily: "Montserrat-Bold",
         color: colors.secondTextColor,
     }
 })

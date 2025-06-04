@@ -18,6 +18,8 @@ import NewPetPage from './src/views/newpetpage';
 import ImmersiveMode from 'react-native-immersive';
 import ForgetPasswordPage from './src/views/forgetpasswordpage';
 import PetPage from './src/views/petPage';
+import PostsPage from './src/views/postsPage';
+import NewPostPage from './src/views/newPostPage';
 
 
 enableScreens();
@@ -65,6 +67,9 @@ export default function App() {
           <Stack.Screen name='NewPetPage' component={NewPetPage} />
           <Stack.Screen name='ForgetPasswordPage' component={ForgetPasswordPage} />
           <Stack.Screen name='PetPage' component={PetPage} />
+          <Stack.Screen name='PostsPage' component={PostsPage} />
+          <Stack.Screen name='NewPostPage' component={NewPostPage} />
+
 
         </Stack.Navigator>
       </NavigationContainer>

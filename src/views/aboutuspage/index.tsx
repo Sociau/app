@@ -12,8 +12,8 @@ import { Text } from "react-native-gesture-handler";
 const AboutUsPage = () => {
     const navigation = useNavigation<AboutUsNavigationProp>();
     return (
-        <View>
-            <ScrollView contentContainerStyle={styles.mainAboutUs}>
+        <View style={styles.mainAboutUs}>
+            <ScrollView contentContainerStyle={styles.container}>
                 <View style={styles.topAboutUs}>
 
                     <Text style={styles.titleAboutUs}>
