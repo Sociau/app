@@ -11,29 +11,6 @@ export const apiGetHome = async () => {
 
 }
 
-export const apiCreateAccount = async (data: any) => {
-    try {
-        const account = await api.post("create_account", {
-            email: data.email,
-            password: data.password,
-            name: data.name,
-            main_whatsapp: data.main_whatsapp,
-            second_whatsapp: data.second_whatsapp,
-            about_you: data.about_you,
-            nickname: data.nickname,
-            state: data.state,
-            city: data.city,
-            street: data.street,
-            neighborhood: data.neighborhood
-        })
-
-        return account
-
-    } catch (error) {
-        console.error(error)
-    }
-}
-
 export const apiLogin = async (data: any) => {
     try {
         const user = await api.post("login", {
@@ -86,3 +63,57 @@ export const getUserById = async (id: number) => {
         console.error(error)
     }
 }
+
+export const apiCreatePet = async (formData: FormData) => {
+    try {
+        const response = await api.post("pets", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
+        return response;
+    } catch (error) {
+        console.error("Erro ao criar pet:", error);
+        throw error;
+    }
+};
+
+export const apiCreateAccount = async (data: FormData) => {
+    try {
+        const account = await api.post("create_account", data, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
+        return account;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+};
+
+export const apiCreatePost = async (formData: FormData) => {
+    try {
+        const response = await api.post("post", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
+
+        return response;
+    } catch (error) {
+        console.error("Erro ao criar post:", error);
+        throw error;
+    }
+};
+
+export const apiGetPosts = async () => {
+    try {
+        const response = await api.get("/post");
+
+        return response.data.Posts;
+    } catch (error) {
+        console.error("Erro ao buscar posts:", error);
+        throw error;
+    }
+};

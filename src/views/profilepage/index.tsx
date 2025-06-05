@@ -76,7 +76,7 @@ const ProfilePage = () => {
             </TouchableOpacity>
 
             <View style={styles.top}>
-                <Image source={{ uri: avatar }} style={styles.profileImage} />
+                <Image source={avatar ? { uri: avatar } : require('../../../assets/images/main_cat.png')} style={styles.profileImage} />
                 <TouchableOpacity>
                     <Image source={images.edit} style={styles.edit} />
                 </TouchableOpacity>

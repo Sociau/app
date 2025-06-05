@@ -3,12 +3,12 @@ import { colors } from "../../../rootStyles";
 
 const styles = StyleSheet.create({
     main: {
-        flex: 1,
         flexDirection: 'column',
         alignItems: 'center',
         width: "100%",
         fontFamily: "Poppins-Regular",
-        backgroundColor: colors.baseColor
+        backgroundColor: colors.baseColor,
+        paddingBottom: 100,
     },
     backArrow: {
         position: "absolute",
@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
         width: "75%",
         alignItems: "center",
         marginBottom: 30,
+        marginTop: 10,
     },
     formLine: {
         width: "100%",

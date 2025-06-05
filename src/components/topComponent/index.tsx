@@ -33,6 +33,7 @@ const TopComponent: React.FC<TopComponentProps> = ({ navigation }) => {
     const images = {
         notifications1: require('../../../assets/icons/notification1.png'),
         notifications2: require('../../../assets/icons/notification2.png'),
+        profileDefault: require('../../../assets/images/main_cat.png'),
     }
 
     const [turnNotifications, setTurnNotifications] = useState(false);
@@ -49,7 +50,7 @@ const TopComponent: React.FC<TopComponentProps> = ({ navigation }) => {
     return (
         <View style={styles.top}>
             <TouchableOpacity style={styles.profile} onPress={() => handleNavigation()}>
-                <Image style={styles.profileImage} source={{ uri: avatar }} />
+                <Image style={styles.profileImage} source={avatar ? { uri: avatar } : images.profileDefault} />
                 <View style={styles.profileText}>
                     <Text style={styles.hello}>{name}</Text>
                     <Text style={styles.alert}>Ver Perfil</Text>

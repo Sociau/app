@@ -6,6 +6,7 @@ import ButtonComponent from "../../components/buttonComponent";
 import { colors } from "../../../rootStyles";
 import { useEffect, useState } from "react";
 import { apiGetPetById, getUserById } from "../../services/apiRequests";
+import AdoptModal from "../../modals/adoptModal";
 
 
 type Pet = {
@@ -54,6 +55,11 @@ const PetPage = () => {
 
     const route = useRoute()
     const { petId } = route.params as { petId: number }
+
+    const [openAdoptModal, setOpenAdoptModal] = useState(false)
+    const handleAdoptModal = () => {
+        setOpenAdoptModal(!openAdoptModal)
+    }
 
     const petBase = {
         "about": "",
@@ -128,7 +134,7 @@ const PetPage = () => {
     }
 
     const images = {
-        white_arrow: require(`../../../assets/icons/white_arrow.png`),
+        white_arrow: require(`../../../assets/icons/default_arrow.png`),
         animal_header: "https://i0.statig.com.br/bancodeimagens/78/pt/gs/78ptgsfeddfh638dkkzya5p3y.jpg",
     }
 
@@ -179,73 +185,80 @@ const PetPage = () => {
     }
 
     return (
-        <ScrollView contentContainerStyle={style.main}>
-            <TouchableOpacity onPress={() => handleBack()} style={style.backArrow}>
-                <Image source={images.white_arrow} />
-            </TouchableOpacity>
+        <>
+            <ScrollView contentContainerStyle={style.main}>
+                <TouchableOpacity onPress={() => handleBack()} style={style.backArrow}>
+                    <Image source={images.white_arrow} />
+                </TouchableOpacity>
 
-            <TouchableOpacity style={style.header}>
-                <Image source={{ uri: pet.main_photo }} style={style.headerImage} />
-            </TouchableOpacity>
+                <TouchableOpacity style={style.header}>
+                    <Image source={{ uri: pet.main_photo }} style={style.headerImage} />
+                </TouchableOpacity>
 
-            <View style={style.petContainer}>
-                <View style={style.petContainerInfo}>
-                    {
-                        petInfo(pet.name, pet.breed)
-                    }
+                <View style={style.petContainer}>
+                    <View style={style.petContainerInfo}>
+                        {
+                            petInfo(pet.name, pet.breed)
+                        }
+
+                        <View>
+                            <Text style={style.petName}>{pet.city}</Text>
+                            <Text style={{ ...style.petSubtitle, alignSelf: "flex-end", }}>{pet.state}</Text>
+                        </View>
+                    </View>
+
+                    <View style={style.petContainerInfo}>
+                        {
+                            petInfo(pet.age, "Idade")
+                        }
+
+                        {
+                            petInfo(pet.gender === "M" ? "Macho" : "Fêmea", "Sexo")
+                        }
+
+                        {
+                            petInfo(petSize(pet.size), "Tamanho")
+                        }
+                    </View>
 
                     <View>
-                        <Text style={style.petName}>{pet.city}</Text>
-                        <Text style={{ ...style.petSubtitle, alignSelf: "flex-end", }}>{pet.state}</Text>
+                        <Text style={style.petName}>Sobre</Text>
+                        <Text style={style.petSubtitle}>{pet.about}</Text>
                     </View>
-                </View>
 
-                <View style={style.petContainerInfo}>
-                    {
-                        petInfo(pet.age, "Idade")
-                    }
+                    <View style={style.petMedicalInfo}>
+                        {
+                            petMedicalInfo("Castrado", pet.veterinary_care)
+                        }
 
-                    {
-                        petInfo(pet.gender === "M" ? "Macho" : "Fêmea", "Sexo")
-                    }
+                        {
+                            petMedicalInfo("Vermifurgado", pet.veterinary_care)
+                        }
 
-                    {
-                        petInfo(petSize(pet.size), "Tamanho")
-                    }
-                </View>
-
-                <View>
-                    <Text style={style.petName}>Sobre</Text>
-                    <Text style={style.petSubtitle}>{pet.about}</Text>
-                </View>
-
-                <View style={style.petMedicalInfo}>
-                    {
-                        petMedicalInfo("Castrado", pet.veterinary_care)
-                    }
-
-                    {
-                        petMedicalInfo("Vermifurgado", pet.veterinary_care)
-                    }
-
-                    {
-                        petMedicalInfo("Vacinado", pet.veterinary_care)
-                    }
-                </View>
-
-
-                <Text style={style.ownerTitle}>Tutor</Text>
-                <View style={style.ownerBox}>
-                    <View style={style.ownerInfo}>
-                        <Image source={{ uri: owner.person.avatar }} style={style.ownerImage} />
-                        <Text style={style.ownerName}>{owner.person.name}</Text>
+                        {
+                            petMedicalInfo("Vacinado", pet.veterinary_care)
+                        }
                     </View>
-                    <Text style={style.ownerText}>Ver Perfil</Text>
-                </View>
 
-                <ButtonComponent handleFunction={() => { }} buttonText="Adotar" bgColor={colors.mainColor} color={colors.textColor} width={100} height={60} />
-            </View>
-        </ScrollView>
+
+                    <Text style={style.ownerTitle}>Tutor</Text>
+                    <View style={style.ownerBox}>
+                        <View style={style.ownerInfo}>
+                            <Image source={{ uri: owner.person.avatar }} style={style.ownerImage} />
+                            <Text style={style.ownerName}>{owner.person.name}</Text>
+                        </View>
+                        <Text style={style.ownerText}>Ver Perfil</Text>
+                    </View>
+
+                    <ButtonComponent handleFunction={() => handleAdoptModal()} buttonText="Adotar" bgColor={colors.mainColor} color={colors.textColor} width={100} height={60} />
+                </View>
+            </ScrollView>
+
+            {
+                openAdoptModal && <AdoptModal handleAdoptModal={handleAdoptModal} adoptModalState={openAdoptModal} />
+            }
+        </>
+
     )
 }
 
