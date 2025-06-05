@@ -11,7 +11,7 @@ export type RootStackParamList = {
     CreateAccountPage: undefined,
     ProfilePage: undefined;
     NewPetPage: undefined;
-    PetPage: undefined;
+    PetPage: { petId: number };
     PostsPage: undefined;
     NewPostPage: undefined;
 };

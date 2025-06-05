@@ -16,21 +16,35 @@ const LoginPage = () => {
     const navigation = useNavigation<LoginNavigationProp>();
     const [mostrarSenha, setMostrarSenha] = useState(true);
 
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
 
     const handleLoginApi = async () => {
         const userLogin = await apiLogin({
-            username: username.trim(),
+            email: email.trim(),
             password: password.trim()
         })
 
-        if (userLogin && userLogin.data.token && userLogin.status == 200) {
+        if (userLogin?.data.status === 404) {
+            console.log("Usuário não encontrado")
+        }
+
+        if (userLogin && userLogin.data.token && userLogin.data.status == 200) {
             const token = userLogin.data.token
-            await AsyncStorage.setItem("token", token)
-            await AsyncStorage.setItem("username", userLogin.data.user.username)
-            await AsyncStorage.setItem("user_id", userLogin.data.user._id)
+
+            try {
+                await AsyncStorage.setItem("token", token);
+                await AsyncStorage.setItem("nickname", userLogin.data.person.nickname);
+                await AsyncStorage.setItem("avatar", userLogin.data.person.avatar);
+                await AsyncStorage.setItem("name", userLogin.data.person.name);
+                await AsyncStorage.setItem("user_id", userLogin.data.person.id.toString());
+            } catch (err) {
+                console.log("Erro ao salvar no AsyncStorage:", err);
+            }
+
+            const storage = await AsyncStorage.getItem("user_id")
+
             navigation.navigate("HomePage")
         } else {
             navigation.navigate("FirstPage")
@@ -63,8 +77,8 @@ const LoginPage = () => {
                     <Text style={styles.loginText}>Login</Text>
 
                     <View style={styles.inputContainer}>
-                        <InputComponent OnChangeTextFunction={() => setUsername(username)} placeHolder="Email" placeHolderTextColor={colors.textColor} multiline={false} type="emailAddress" />
-                        <InputComponent OnChangeTextFunction={() => setPassword(password)} placeHolder="Senha" placeHolderTextColor={colors.textColor} multiline={false} type="password" isSecure={mostrarSenha} />
+                        <InputComponent OnChangeTextFunction={setEmail} placeHolder="Email" placeHolderTextColor={colors.textColor} multiline={false} type="emailAddress" />
+                        <InputComponent OnChangeTextFunction={setPassword} placeHolder="Senha" placeHolderTextColor={colors.textColor} multiline={false} type="password" isSecure={mostrarSenha} />
                         <EyeIconComponent
                             handleFunction={setMostrarSenha}
                             status={mostrarSenha}
@@ -77,7 +91,7 @@ const LoginPage = () => {
 
                     <View style={styles.buttonsContainer}>
                         <ButtonComponent
-                            handleFunction={handleLogin}
+                            handleFunction={handleLoginApi}
                             buttonText="Entrar"
                             bgColor={colors.textColor}
                             color={colors.helloText}

@@ -13,10 +13,18 @@ export const apiGetHome = async () => {
 
 export const apiCreateAccount = async (data: any) => {
     try {
-
         const account = await api.post("create_account", {
-            username: data.username,
+            email: data.email,
             password: data.password,
+            name: data.name,
+            main_whatsapp: data.main_whatsapp,
+            second_whatsapp: data.second_whatsapp,
+            about_you: data.about_you,
+            nickname: data.nickname,
+            state: data.state,
+            city: data.city,
+            street: data.street,
+            neighborhood: data.neighborhood
         })
 
         return account
@@ -28,9 +36,8 @@ export const apiCreateAccount = async (data: any) => {
 
 export const apiLogin = async (data: any) => {
     try {
-
         const user = await api.post("login", {
-            username: data.username,
+            email: data.email,
             password: data.password
         })
 
@@ -44,7 +51,37 @@ export const apiLogin = async (data: any) => {
 export const apiLogout = async () => {
     try {
         await AsyncStorage.removeItem("token")
-        await AsyncStorage.removeItem("user")
+        await AsyncStorage.removeItem("nickname");
+        await AsyncStorage.removeItem("avatar");
+        await AsyncStorage.removeItem("name");
+        await AsyncStorage.removeItem("user_id");
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+export const apiGetPets = async () => {
+    try {
+        const pets = await api.get("pets")
+        return pets
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+export const apiGetPetById = async (id: number) => {
+    try {
+        const pet = await api.get(`pets/${id}`)
+        return pet
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+export const getUserById = async (id: number) => {
+    try {
+        const userId = await api.get(`user/${id}`)
+        return userId
     } catch (error) {
         console.error(error)
     }

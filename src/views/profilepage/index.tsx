@@ -3,8 +3,33 @@ import { Text, View, TouchableOpacity, Image } from "react-native";
 import { styles } from "./style";
 import { useNavigation } from "@react-navigation/native";
 import { ProfileNavigationProp } from "../../types/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { apiLogout } from "../../services/apiRequests";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const ProfilePage = () => {
+    const [name, setName] = useState("");
+    const [avatar, setAvatar] = useState("");
+
+    useEffect(() => {
+        const getData = async () => {
+            try {
+
+                const name = await AsyncStorage.getItem("name");
+                const avatar = await AsyncStorage.getItem("avatar");
+                if (name) {
+                    setName(name);
+                }
+
+                if (avatar) {
+                    setAvatar(avatar);
+                }
+            } catch (error) {
+                console.error("Erro ao buscar keys", error)
+            }
+        }
+
+        getData();
+    }, [])
     const navigation = useNavigation<ProfileNavigationProp>();
     const handleBack = () => {
         navigation.navigate("HomePage");
@@ -25,13 +50,16 @@ const ProfilePage = () => {
         setTurnNotifications(!turnNotifications);
     }
 
-    const handleAction = (goTo: any) => {
+    const handleAction = (goTo: any, text: string) => {
+        if (text === "Sair da conta") {
+            apiLogout();
+        }
         navigation.navigate(goTo);
     }
 
     const handleOptions = (id: number, text: string, action: string) => {
         return (
-            <TouchableOpacity style={styles.menuOptions} key={id} onPress={() => handleAction(action)}>
+            <TouchableOpacity style={styles.menuOptions} key={id} onPress={() => handleAction(action, text)}>
                 <Text style={styles.menuOptionsText}>{text}</Text>
                 <Image source={images.nav} style={styles.navegate} />
             </TouchableOpacity>
@@ -48,7 +76,7 @@ const ProfilePage = () => {
             </TouchableOpacity>
 
             <View style={styles.top}>
-                <Image source={{ uri: images.profile }} style={styles.profileImage} />
+                <Image source={{ uri: avatar }} style={styles.profileImage} />
                 <TouchableOpacity>
                     <Image source={images.edit} style={styles.edit} />
                 </TouchableOpacity>

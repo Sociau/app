@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ScrollView, View } from "react-native";
 import { styles } from "./styles";
 import BottomMenuComponent from "../../components/bottomMenu";
@@ -8,43 +8,58 @@ import FilterModal from "../../modals/filter";
 import { useNavigation } from "@react-navigation/native";
 import { HomeNavigationProp } from "../../types/navigation";
 import PetComponent from "../../components/petComponent";
+import { apiGetPets } from "../../services/apiRequests";
 
-
+type Pet = {
+    pet: {
+        "about": string,
+        "adopted": boolean,
+        "age": string,
+        "breed": string,
+        "city": string,
+        "gender": string,
+        "id": number,
+        "main_photo": string,
+        "name": string,
+        "person_id": number,
+        "size": string,
+        "species": string,
+        "state": string,
+        "temperament": string,
+        "veterinary_care": string
+    }
+}
 const HomePage = () => {
     const navigation = useNavigation<HomeNavigationProp>()
     const [openModal, setOpenModal] = useState(false)
+    const [pets, setPets] = useState<Pet[]>([])
 
-    const pets = [
-        {
-            name: "Zeca",
-            age: "2 anos",
-            breed: "Vira-Lata",
-            gender: "M",
-            image: "https://i0.statig.com.br/bancodeimagens/78/pt/gs/78ptgsfeddfh638dkkzya5p3y.jpg"
-        },
-        {
-            name: "Henriquinho",
-            age: "5 anos",
-            breed: "Vira-Lata",
-            gender: "M",
-            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZVGLhj-cSvyR84kbfc7-7mNPDCDHj_58p8Q&s"
-        },
-        {
-            name: "Maria",
-            age: "2 anos",
-            breed: "Vira-Lata",
-            gender: "F",
-            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSk8d549JRA6Wa2gjyfbgNZ67456g2Di8EKiQ&s"
-        },
+    useEffect(() => {
+        const getPets = async () => {
+            try {
+                const response = await apiGetPets()
+                console.log(response)
+                if (response && response.data && Array.isArray(response.data.pets)) {
+                    setPets(response.data.pets)
+                } else {
+                    setPets([])
+                }
+            } catch (error) {
+                console.error("Erro ao buscar pets", error)
+                setPets([])
+            }
+        }
 
-    ]
+        getPets()
+    }, [])
+
 
     const handleFilterModal = () => {
         setOpenModal(!openModal)
     }
 
-    const goToPetPage = () => {
-        navigation.navigate("PetPage");
+    const goToPetPage = (petId: number) => {
+        navigation.navigate("PetPage", { petId });
     }
 
     return (
@@ -55,7 +70,7 @@ const HomePage = () => {
 
                 <ScrollView contentContainerStyle={styles.scrollInside} showsVerticalScrollIndicator={false}>
                     {pets.map((pet, index) => (
-                        <PetComponent key={index} pet={pet} handleFunction={goToPetPage} />
+                        <PetComponent key={index} pet={pet} handleFunction={() => goToPetPage(pet.pet.id)} />
                     ))}
                 </ScrollView>
                 <BottomMenuComponent />

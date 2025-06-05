@@ -1,13 +1,127 @@
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { style } from "./style"
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { PetNavigationProp } from "../../types/navigation";
 import ButtonComponent from "../../components/buttonComponent";
 import { colors } from "../../../rootStyles";
+import { useEffect, useState } from "react";
+import { apiGetPetById, getUserById } from "../../services/apiRequests";
+
+
+type Pet = {
+    "about": string,
+    "adopted": boolean,
+    "age": string,
+    "breed": string,
+    "city": string,
+    "gender": string,
+    "id": number,
+    "main_photo": string,
+    "name": string,
+    "person_id": number,
+    "size": string,
+    "species": string,
+    "state": string,
+    "temperament": string,
+    "veterinary_care": string
+}
+
+type User = {
+    "address": {
+        "city": string,
+        "id": number,
+        "neighborhood": string,
+        "state": string,
+        "street": string
+    },
+    "person": {
+        "about_you": string,
+        "address_id": number,
+        "avatar": string,
+        "email": string,
+        "email_code": number,
+        "id": number,
+        "main_whatsapp": string,
+        "name": string,
+        "nickname": string,
+        "second_whatsapp": string
+    },
+    "status": number
+}
 
 const PetPage = () => {
-
     const navigation = useNavigation<PetNavigationProp>();
+
+    const route = useRoute()
+    const { petId } = route.params as { petId: number }
+
+    const petBase = {
+        "about": "",
+        "adopted": false,
+        "age": "",
+        "breed": "",
+        "city": "",
+        "gender": "",
+        "id": 0,
+        "main_photo": "",
+        "name": "",
+        "person_id": 0,
+        "size": "",
+        "species": "",
+        "state": "",
+        "temperament": "",
+        "veterinary_care": ""
+    }
+
+    const ownerBase = {
+        "address": {
+            "city": "",
+            "id": 1,
+            "neighborhood": "",
+            "state": "",
+            "street": ""
+        },
+        "person": {
+            "about_you": "",
+            "address_id": 1,
+            "avatar": "",
+            "email": "",
+            "email_code": 1,
+            "id": 1,
+            "main_whatsapp": "",
+            "name": "",
+            "nickname": "",
+            "second_whatsapp": ""
+        },
+        "status": 1
+    }
+
+    const [pet, setPet] = useState<Pet>(petBase)
+    const [owner, setOwner] = useState<User>(ownerBase)
+
+    useEffect(() => {
+        const getPets = async () => {
+            try {
+                const response = await apiGetPetById(petId)
+                console.log(response)
+                if (response && response.data.pet) {
+                    setPet(response.data.pet)
+                    console.log("response.data.pet.person_id", response.data.pet.person_id)
+
+                    const user = await getUserById(response.data.pet.person_id)
+                    console.log(user)
+                    if (user && user.data.person) {
+                        setOwner(user.data)
+                    }
+                }
+            } catch (error) {
+                console.error("Erro ao buscar pets", error)
+                setPet(petBase)
+            }
+        }
+
+        getPets()
+    }, [])
 
     const handleBack = () => {
         navigation.navigate("HomePage");
@@ -16,25 +130,6 @@ const PetPage = () => {
     const images = {
         white_arrow: require(`../../../assets/icons/white_arrow.png`),
         animal_header: "https://i0.statig.com.br/bancodeimagens/78/pt/gs/78ptgsfeddfh638dkkzya5p3y.jpg",
-    }
-
-    const pet = {
-        "name": "Zeca",
-        "age": "2 anos",
-        "breed": "Vira-Lata",
-        "gender": "M",
-        "image": "https://i0.statig.com.br/bancodeimagens/78/pt/gs/78ptgsfeddfh638dkkzya5p3y.jpg",
-        "city": "Santa Luzia",
-        "state": "PB",
-        "size": "M",
-        "description": "Oi, galera! Encontrei esse cachorro super tranquilo e carinhoso na rua, e decidi ajudar. Ele é de porte médio, bem calmo e parece estar acostumado com pessoas. Está saudável, vacinado e já castrado. Não posso ficar com ele, mas queria muito encontrar uma família que dê o amor que ele merece.",
-        "castrated": true,
-        "vaccinated": true,
-        "dewormed": true,
-        "owner": {
-            "name": "Lucas",
-            "image": "https://classic.exame.com/wp-content/uploads/2024/12/RockyBalboa.jpg",
-        }
     }
 
     const petSize = (size: string) => {
@@ -60,7 +155,17 @@ const PetPage = () => {
         )
     }
 
-    const petMedicalInfo = (title: string, is: boolean) => {
+    const petMedicalInfo = (title: string, options: string) => {
+        let cuidados = [];
+        try {
+            cuidados = JSON.parse(options);
+            if (!Array.isArray(cuidados)) cuidados = [];
+        } catch (e) {
+            cuidados = [];
+        }
+
+        const is = cuidados.includes(title);
+
         return (
             <View style={style.petMedicalContainer}>
                 <Text style={style.petSubtitle}>{title}</Text>
@@ -80,7 +185,7 @@ const PetPage = () => {
             </TouchableOpacity>
 
             <TouchableOpacity style={style.header}>
-                <Image source={{ uri: images.animal_header }} style={style.headerImage} />
+                <Image source={{ uri: pet.main_photo }} style={style.headerImage} />
             </TouchableOpacity>
 
             <View style={style.petContainer}>
@@ -111,20 +216,20 @@ const PetPage = () => {
 
                 <View>
                     <Text style={style.petName}>Sobre</Text>
-                    <Text style={style.petSubtitle}>{pet.description}</Text>
+                    <Text style={style.petSubtitle}>{pet.about}</Text>
                 </View>
 
                 <View style={style.petMedicalInfo}>
                     {
-                        petMedicalInfo("Castrado", pet.castrated)
+                        petMedicalInfo("Castrado", pet.veterinary_care)
                     }
 
                     {
-                        petMedicalInfo("Vermifurgado", pet.dewormed)
+                        petMedicalInfo("Vermifurgado", pet.veterinary_care)
                     }
 
                     {
-                        petMedicalInfo("Vacinado", pet.vaccinated)
+                        petMedicalInfo("Vacinado", pet.veterinary_care)
                     }
                 </View>
 
@@ -132,8 +237,8 @@ const PetPage = () => {
                 <Text style={style.ownerTitle}>Tutor</Text>
                 <View style={style.ownerBox}>
                     <View style={style.ownerInfo}>
-                        <Image source={{ uri: pet.owner.image }} style={style.ownerImage} />
-                        <Text style={style.ownerName}>{pet.owner.name}</Text>
+                        <Image source={{ uri: owner.person.avatar }} style={style.ownerImage} />
+                        <Text style={style.ownerName}>{owner.person.name}</Text>
                     </View>
                     <Text style={style.ownerText}>Ver Perfil</Text>
                 </View>

@@ -9,7 +9,7 @@ type InputComponentProps = {
     multiline: boolean,
     placeHolder: string,
     placeHolderTextColor: string,
-    OnChangeTextFunction: () => void,
+    OnChangeTextFunction: (text: string) => void,
     fontColor?: string,
 
 }
@@ -21,7 +21,7 @@ const InputComponent: React.FC<InputComponentProps> = ({ isSecure, type, multili
             placeholderTextColor={placeHolderTextColor} multiline={multiline}
             textContentType={type}
             secureTextEntry={isSecure}
-            onChangeText={() => OnChangeTextFunction()} />
+            onChangeText={(text) => OnChangeTextFunction(text)} />
     )
 }
 

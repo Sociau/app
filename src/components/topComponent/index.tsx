@@ -1,15 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Image, Text, TouchableOpacity } from "react-native";
 import { styles } from "./style";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type TopComponentProps = {
     navigation: any
 }
 const TopComponent: React.FC<TopComponentProps> = ({ navigation }) => {
+    const [name, setName] = useState("");
+    const [avatar, setAvatar] = useState("");
+
+    useEffect(() => {
+        const getData = async () => {
+            try {
+
+                const name = await AsyncStorage.getItem("name");
+                const avatar = await AsyncStorage.getItem("avatar");
+                if (name) {
+                    setName(name);
+                }
+
+                if (avatar) {
+                    setAvatar(avatar);
+                }
+            } catch (error) {
+                console.error("Erro ao buscar keys", error)
+            }
+        }
+
+        getData();
+    }, [])
     const images = {
         notifications1: require('../../../assets/icons/notification1.png'),
         notifications2: require('../../../assets/icons/notification2.png'),
-        profile: "https://classic.exame.com/wp-content/uploads/2024/12/RockyBalboa.jpg"
     }
 
     const [turnNotifications, setTurnNotifications] = useState(false);
@@ -26,9 +49,9 @@ const TopComponent: React.FC<TopComponentProps> = ({ navigation }) => {
     return (
         <View style={styles.top}>
             <TouchableOpacity style={styles.profile} onPress={() => handleNavigation()}>
-                <Image style={styles.profileImage} source={{ uri: images.profile }} />
+                <Image style={styles.profileImage} source={{ uri: avatar }} />
                 <View style={styles.profileText}>
-                    <Text style={styles.hello}>Olá, Lucas</Text>
+                    <Text style={styles.hello}>{name}</Text>
                     <Text style={styles.alert}>Ver Perfil</Text>
                 </View>
             </TouchableOpacity>
